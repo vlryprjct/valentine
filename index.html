@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="uk">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -78,7 +77,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
+            transform: translate(-50%, -50%) rotate(45deg);
             color: #ff1493;
             font-size: 20px;
             font-weight: bold;
@@ -89,19 +88,9 @@
         }
 
         @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: rotate(-45deg) scale(1);
-            }
-
-            25% {
-                transform: rotate(-45deg) scale(1.1);
-            }
-
-            50% {
-                transform: rotate(-45deg) scale(1);
-            }
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            25% { transform: rotate(-45deg) scale(1.1); }
+            50% { transform: rotate(-45deg) scale(1); }
         }
 
         .main-title {
@@ -140,15 +129,8 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .particle {
@@ -191,7 +173,6 @@
                 opacity: 1;
                 transform: rotate(-45deg) translate(0, 0) scale(1);
             }
-
             100% {
                 opacity: 0;
                 transform: rotate(-45deg) translate(var(--tx), var(--ty)) scale(0.3);
@@ -226,7 +207,6 @@
                 transform: translateY(-100px) rotate(0deg);
                 opacity: 0.15;
             }
-
             100% {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
@@ -234,7 +214,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="background-hearts" id="bgHearts"></div>
 
@@ -288,9 +267,9 @@
         function isOverlapping(x, y, width, height) {
             for (let pos of usedPositions) {
                 if (!(x + width < pos.x ||
-                    x > pos.x + pos.width ||
-                    y + height < pos.y ||
-                    y > pos.y + pos.height)) {
+                      x > pos.x + pos.width ||
+                      y + height < pos.y ||
+                      y > pos.y + pos.height)) {
                     return true;
                 }
             }
@@ -443,22 +422,20 @@
             currentWordIndex++;
         }
 
-        document.getElementById('screen2').addEventListener('click', function (e) {
+        document.getElementById('screen2').addEventListener('click', function(e) {
             if (!e.target.classList.contains('floating-word')) {
                 createWord(e.clientX, e.clientY);
             }
         });
 
-        document.getElementById('screen2').addEventListener('touchstart', function (e) {
+        document.getElementById('screen2').addEventListener('touchend', function(e) {
             if (!e.target.classList.contains('floating-word')) {
-                e.preventDefault();
-                const touch = e.touches[0];
+                const touch = e.changedTouches[0];
                 createWord(touch.clientX, touch.clientY);
             }
-        }, { passive: false });
+        });
 
         createBackgroundHearts();
     </script>
 </body>
-
 </html>
